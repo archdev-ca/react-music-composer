@@ -1,12 +1,9 @@
-import ScoreView from '@/features/score/pages/[id]'
-import React from 'react'
+import ScoreView from '@/features/score/pages/[id]';
 
-type Props = {}
+type Props = {};
 
 function PageView({}: Props) {
-  return (
-    <ScoreView />
-  )
+  return <ScoreView />;
 }
 
-export default PageView
+export default PageView;

@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 function ScoreView({}: Props) {
-  return (
-    <div>ScoreView</div>
-  )
+  return <div>ScoreView</div>;
 }
 
-export default ScoreView
+export default ScoreView;

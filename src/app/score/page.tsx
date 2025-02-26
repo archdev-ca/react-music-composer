@@ -1,12 +1,9 @@
-import ScoreIndex from '@/features/score/pages'
-import React from 'react'
+import ScoreIndex from '@/features/score/pages';
 
-type Props = {}
+type Props = {};
 
 function Page({}: Props) {
-  return (
-    <ScoreIndex />
-  )
+  return <ScoreIndex />;
 }
 
-export default Page
+export default Page;
