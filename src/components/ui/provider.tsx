@@ -10,3 +10,5 @@ export function Provider(props: ColorModeProviderProps) {
     </ChakraProvider>
   );
 }
+
+export default Provider;
