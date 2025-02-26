@@ -1,11 +1,11 @@
-import { Heading } from '@chakra-ui/react'
+import { Button, Flex, Heading, HStack } from '@chakra-ui/react'
 import React from 'react'
 
 type Props = {}
 
 function ScoreIndex({}: Props) {
   return (
-    <div><Heading>Music Scores</Heading></div>
+    <HStack><Heading>Music Scores</Heading><Button>Create Sheet Music</Button></HStack>
   )
 }
 
