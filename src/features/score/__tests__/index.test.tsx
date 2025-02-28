@@ -1,31 +1,33 @@
-import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
-import { render, screen } from '@testing-library/react';
-import ScoreIndex from '.';
+import { render, screen, waitFor } from '@testing-library/react';
+import ScoreIndex from './../pages/index';
+import { AllProviders } from '@/test/utils';
 
 describe('Scores Index Page', () => {
-  it('Renders heading', () => {
+  it('Renders heading', async () => {
     render(
-      <ChakraProvider value={defaultSystem}>
+      <AllProviders>
         <ScoreIndex />
-      </ChakraProvider>
+      </AllProviders>
     );
-    const headingElement = screen.getByText(/music scores/i);
-    expect(headingElement).toBeInTheDocument();
+    await waitFor(() => {
+      const headingElement = screen.getByText(/music scores/i);
+      expect(headingElement).toBeInTheDocument();
+    });
   });
   it('Renders create music sheet button', () => {
     render(
-      <ChakraProvider value={defaultSystem}>
+      <AllProviders>
         <ScoreIndex />
-      </ChakraProvider>
+      </AllProviders>
     );
     const buttonElement = screen.getByText(/create sheet music/i);
     expect(buttonElement).toBeInTheDocument();
   });
   it('Renders an empty message when there are no items', () => {
     render(
-      <ChakraProvider value={defaultSystem}>
+      <AllProviders>
         <ScoreIndex />
-      </ChakraProvider>
+      </AllProviders>
     );
     const text = screen.getByText(/no sheet music found/i);
     expect(text).toBeInTheDocument();
@@ -43,9 +45,9 @@ describe('Scores Index Page', () => {
     ) as jest.Mock;
 
     render(
-      <ChakraProvider value={defaultSystem}>
+      <AllProviders>
         <ScoreIndex />
-      </ChakraProvider>
+      </AllProviders>
     );
     for (const record of records) {
       const recordItem = await screen.findByText(new RegExp(record.title, 'i'));

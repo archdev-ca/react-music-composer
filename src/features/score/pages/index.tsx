@@ -8,8 +8,6 @@ type Props = {};
 function ScoreIndex({}: Props) {
   const { getScores } = useScores();
 
-  console.log({ getScores });
-
   return (
     <VStack>
       <HStack>
