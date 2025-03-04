@@ -8,13 +8,13 @@ type Props = {};
 function ScoreIndex({}: Props) {
   const { getScores } = useScores();
 
-  console.log({ getScores: getScores.data });
-
   return (
     <VStack>
       <HStack>
         <Heading>Music Scores</Heading>
-        <Button>Create Sheet Music</Button>
+        <Button asChild>
+          <a href="/score/create">Create Sheet Music</a>
+        </Button>
       </HStack>
       {getScores.data?.length ? (
         <Table.Root>

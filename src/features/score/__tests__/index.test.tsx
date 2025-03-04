@@ -1,9 +1,14 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import useEvent from '@testing-library/user-event';
 import ScoreIndex from './../pages/index';
 import { AllProviders } from '@/test/utils';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 jest.mock('axios');
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}));
 
 describe('Scores Index Page', () => {
   it('Renders heading', async () => {
@@ -17,14 +22,18 @@ describe('Scores Index Page', () => {
       expect(headingElement).toBeInTheDocument();
     });
   });
-  it('Renders create music sheet button', () => {
+  it('Allows me to create new music sheet', async () => {
+    const push = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({ push });
     render(
       <AllProviders>
         <ScoreIndex />
       </AllProviders>
     );
     const buttonElement = screen.getByText(/create sheet music/i);
-    expect(buttonElement).toBeInTheDocument();
+    await useEvent.click(buttonElement);
+    // expect(buttonElement).toBeInTheDocument();
+    expect(buttonElement).toHaveAttribute('href', '/score/create');
   });
   it('Renders an empty message when there are no items', () => {
     render(
@@ -35,6 +44,7 @@ describe('Scores Index Page', () => {
     const text = screen.getByText(/no sheet music found/i);
     expect(text).toBeInTheDocument();
   });
+
   it('Renders a list of records', async () => {
     const records = [
       { id: 1, title: 'Fur Elise' },
