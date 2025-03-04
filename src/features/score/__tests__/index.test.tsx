@@ -1,6 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import ScoreIndex from './../pages/index';
 import { AllProviders } from '@/test/utils';
+import axios from 'axios';
+
+jest.mock('axios');
 
 describe('Scores Index Page', () => {
   it('Renders heading', async () => {
@@ -38,11 +41,7 @@ describe('Scores Index Page', () => {
       { id: 1, title: 'River Flows in You' }
     ];
 
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(records)
-      })
-    ) as jest.Mock;
+    (axios.get as jest.Mock).mockResolvedValueOnce({ data: records });
 
     render(
       <AllProviders>

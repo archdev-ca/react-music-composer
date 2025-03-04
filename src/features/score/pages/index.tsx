@@ -8,6 +8,8 @@ type Props = {};
 function ScoreIndex({}: Props) {
   const { getScores } = useScores();
 
+  console.log({ getScores: getScores.data });
+
   return (
     <VStack>
       <HStack>
@@ -25,7 +27,7 @@ function ScoreIndex({}: Props) {
           </Table.Header>
           <Table.Body>
             {getScores.data.map((score, i) => (
-              <Table.Row>
+              <Table.Row key={i}>
                 <Table.Cell>{score.id}</Table.Cell>
                 <Table.Cell>{score.title}</Table.Cell>
                 <Table.Cell>{score.author}</Table.Cell>
