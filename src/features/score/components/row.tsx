@@ -24,9 +24,8 @@ const Line = chakra('div', {
 
 const Space = chakra('div', {
   base: {
-    height: '3px',
+    height: '11px',
     width: '100%',
-    paddingY: '4px',
     '&:hover': {
       backgroundColor: '#eee'
     }
@@ -35,8 +34,10 @@ const Space = chakra('div', {
 
 export function Row({ children }: Props) {
   return (
-    <VStack>
-      <HStack width="100%">{children}</HStack>
+    <VStack data-component="Row" alignItems="stretch" marginBottom={60}>
+      <HStack width="100%" flex={1} alignItems="stretch">
+        {children}
+      </HStack>
       <VStack width="100%" gap={0}>
         <Line />
         <Space />
