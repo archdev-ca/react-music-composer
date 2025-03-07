@@ -1,5 +1,5 @@
 'use client';
-import { chakra, Flex, HStack, VStack } from '@chakra-ui/react';
+import { Button, chakra, Flex, HStack, VStack } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 
 type Props = {
