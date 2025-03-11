@@ -66,7 +66,16 @@ function ScoreCreate({}: Props) {
     <Box paddingTop={40} paddingX={10}>
       <Card.Root bg="#fff">
         <Card.Body>
-          <Row>
+          <Row clef="treble">
+            {notes.map((note) => {
+              return (
+                <Beat key={note}>
+                  <Note tonality={note} duration={DURATION} />
+                </Beat>
+              );
+            })}
+          </Row>
+          <Row clef="bass">
             {notes.map((note) => {
               return (
                 <Beat key={note}>

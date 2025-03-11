@@ -1,9 +1,13 @@
 'use client';
-import { Button, chakra, Flex, HStack, VStack } from '@chakra-ui/react';
+import { Box, Button, chakra, Flex, HStack, VStack } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
+import treble from '@/assets/images/treble.png';
+import bass from '@/assets/images/bass.png';
+import Image from 'next/image';
 
 type Props = {
   children: ReactNode;
+  clef: 'bass' | 'treble';
 };
 
 const Line = chakra('div', {
@@ -19,15 +23,6 @@ const Line = chakra('div', {
     '&:hover': {
       backgroundColor: '#eee'
     }
-  },
-  variants: {
-    variant: {
-      phantom: {
-        '&:after': {
-          backgroundColor: '#ddd'
-        }
-      }
-    }
   }
 });
 
@@ -41,9 +36,22 @@ const Space = chakra('div', {
   }
 });
 
-export function Row({ children }: Props) {
+const spaces = {
+  bass: [],
+  treble: []
+};
+
+const symbols = {
+  bass: bass.src,
+  treble: treble.src
+};
+
+export function Row({ children, clef }: Props) {
   return (
     <VStack data-component="Row" alignItems="stretch" marginBottom={60}>
+      <Box position="absolute">
+        <Image src={symbols[clef]} alt="" width={40} height={40} />
+      </Box>
       <HStack width="100%" flex={1} alignItems="stretch">
         {children}
       </HStack>
@@ -59,22 +67,6 @@ export function Row({ children }: Props) {
         <Line />
         <Space />
         <Line />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
-        <Space />
-        <Line variant="phantom" />
         <Space />
         <Line variant="phantom" />
         <Space />
