@@ -6,7 +6,7 @@ type Props = {};
 
 const DURATION = 1;
 
-const notes = [
+const notes: NoteKey[] = [
   'a0',
   'b0',
   'c1',
@@ -69,7 +69,7 @@ function ScoreCreate({}: Props) {
           <Row>
             {notes.map((note) => {
               return (
-                <Beat>
+                <Beat key={note}>
                   <Note tonality={note} duration={DURATION} />
                 </Beat>
               );
