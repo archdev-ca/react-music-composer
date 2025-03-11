@@ -15,7 +15,8 @@ function DefaultLayout({ children }: Props) {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider>
-        <Container>{children}</Container>
+        {/* <Container>{children}</Container> */}
+        <div>{children}</div>
       </Provider>
     </QueryClientProvider>
   );

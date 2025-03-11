@@ -21,61 +21,6 @@ const assets = {
   16: Note16
 };
 
-const positionMap = {
-  a0: 25,
-  b0: 24,
-  c1: 23,
-  d1: 22,
-  e1: 21,
-  f1: 20,
-  g1: 19,
-  a1: 18,
-  b1: 17,
-  c2: 16,
-  d2: 15,
-  e2: 14,
-  f2: 13,
-  g2: 12,
-  a2: 11,
-  b2: 10,
-  c3: 9,
-  d3: 8,
-  e3: 7,
-  f3: 6,
-  g3: 5,
-  a3: 4,
-  b3: 3,
-  c4: 2,
-  d4: 1,
-  e4: 0,
-  f4: -1,
-  g4: -2,
-  a4: -3,
-  b4: -4,
-  c5: -5,
-  d5: -6,
-  e5: -7,
-  f5: -8,
-  g5: -9,
-  a5: -10,
-  b5: -11,
-  c6: -12,
-  d6: -13,
-  e6: -14,
-  f6: -15,
-  g6: -16,
-  a6: -17,
-  b6: -18,
-  c7: -19,
-  d7: -20,
-  e7: -21,
-  f7: -22,
-  g7: -23,
-  a7: -24,
-  b7: -25,
-  c8: -26
-};
-
 const INCREMENT = 11;
 const BASE_POS = 88;
 
@@ -107,6 +52,217 @@ const NOTE_POSITION_OFFSET = {
   d4: -1
 };
 
+const noteConfig = {
+  a0: {
+    pos: 25,
+    floating: false
+  },
+  b0: {
+    pos: 24,
+    floating: false
+  },
+  c1: {
+    pos: 23,
+    floating: false
+  },
+  d1: {
+    pos: 22,
+    floating: false
+  },
+  e1: {
+    pos: 21,
+    floating: false
+  },
+  f1: {
+    pos: 20,
+    floating: false
+  },
+  g1: {
+    pos: 19,
+    floating: false
+  },
+  a1: {
+    pos: 18,
+    floating: false
+  },
+  b1: {
+    pos: 17,
+    floating: false
+  },
+  c2: {
+    pos: 16,
+    floating: false
+  },
+  d2: {
+    pos: 15,
+    floating: false
+  },
+  e2: {
+    pos: 14,
+    floating: false
+  },
+  f2: {
+    pos: 13,
+    floating: false
+  },
+  g2: {
+    pos: 12,
+    floating: false
+  },
+  a2: {
+    pos: 11,
+    floating: false
+  },
+  b2: {
+    pos: 10,
+    floating: false
+  },
+  c3: {
+    pos: 9,
+    floating: false
+  },
+  d3: {
+    pos: 8,
+    floating: false
+  },
+  e3: {
+    pos: 7,
+    floating: false
+  },
+  f3: {
+    pos: 6,
+    floating: false
+  },
+  g3: {
+    pos: 5,
+    floating: false
+  },
+  a3: {
+    pos: 4,
+    floating: false
+  },
+  b3: {
+    pos: 3,
+    floating: false
+  },
+  c4: {
+    pos: 2,
+    floating: false
+  },
+  d4: {
+    pos: 1,
+    floating: false
+  },
+  e4: {
+    pos: 0,
+    floating: false
+  },
+  f4: {
+    pos: -1,
+    floating: false
+  },
+  g4: {
+    pos: -2,
+    floating: false
+  },
+  a4: {
+    pos: -3,
+    floating: false
+  },
+  b4: {
+    pos: -4,
+    floating: false
+  },
+  c5: {
+    pos: -5,
+    floating: false
+  },
+  d5: {
+    pos: -6,
+    floating: false
+  },
+  e5: {
+    pos: -7,
+    floating: false
+  },
+  f5: {
+    pos: -8,
+    floating: false
+  },
+  g5: {
+    pos: -9,
+    floating: false
+  },
+  a5: {
+    pos: -10,
+    floating: false
+  },
+  b5: {
+    pos: -11,
+    floating: false
+  },
+  c6: {
+    pos: -12,
+    floating: false
+  },
+  d6: {
+    pos: -13,
+    floating: false
+  },
+  e6: {
+    pos: -14,
+    floating: false
+  },
+  f6: {
+    pos: -15,
+    floating: false
+  },
+  g6: {
+    pos: -16,
+    floating: false
+  },
+  a6: {
+    pos: -17,
+    floating: false
+  },
+  b6: {
+    pos: -18,
+    floating: false
+  },
+  c7: {
+    pos: -19,
+    floating: false
+  },
+  d7: {
+    pos: -20,
+    floating: false
+  },
+  e7: {
+    pos: -21,
+    floating: false
+  },
+  f7: {
+    pos: -22,
+    floating: false
+  },
+  g7: {
+    pos: -23,
+    floating: false
+  },
+  a7: {
+    pos: -24,
+    floating: false
+  },
+  b7: {
+    pos: -25,
+    floating: false
+  },
+  c8: {
+    pos: -26,
+    floating: false
+  }
+};
+
 const NoteContainer = chakra('div', {
   base: {
     position: 'absolute',
@@ -126,16 +282,28 @@ const NoteName = chakra('span', {
   }
 });
 
+const PhantomLine = chakra('div', {
+  base: {
+    position: 'absolute',
+    height: '1px',
+    backgroundColor: '#000',
+    bottom: '5px',
+    left: '-10px',
+    right: '-10px'
+  }
+});
+
 export function Note({ tonality, duration }: Props) {
   const top =
-    typeof positionMap[tonality] !== 'undefined'
-      ? `${positionMap[tonality] * INCREMENT + BASE_POS}px`
+    typeof noteConfig[tonality].pos !== 'undefined'
+      ? `${noteConfig[tonality].pos * INCREMENT + BASE_POS}px`
       : 0;
   console.log(tonality, top);
   return (
     <NoteContainer data-component="note" data-key={`${tonality}`} top={top}>
       <NoteName>{tonality}</NoteName>
       <Image src={assets[duration]} alt="" />
+      {noteConfig[tonality].floating && <PhantomLine />}
     </NoteContainer>
   );
 }

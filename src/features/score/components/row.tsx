@@ -19,6 +19,15 @@ const Line = chakra('div', {
     '&:hover': {
       backgroundColor: '#eee'
     }
+  },
+  variants: {
+    variant: {
+      phantom: {
+        '&:after': {
+          backgroundColor: '#ddd'
+        }
+      }
+    }
   }
 });
 
@@ -50,6 +59,31 @@ export function Row({ children }: Props) {
         <Line />
         <Space />
         <Line />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
+        <Line variant="phantom" />
+        <Space />
       </VStack>
     </VStack>
   );
