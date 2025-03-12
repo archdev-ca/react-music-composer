@@ -298,7 +298,7 @@ export function Note({ tonality, duration }: Props) {
     typeof noteConfig[tonality].pos !== 'undefined'
       ? `${noteConfig[tonality].pos * INCREMENT + BASE_POS}px`
       : 0;
-  console.log(tonality, top);
+
   return (
     <NoteContainer data-component="note" data-key={`${tonality}`} top={top}>
       <NoteName>{tonality}</NoteName>

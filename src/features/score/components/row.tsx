@@ -4,27 +4,12 @@ import React, { ReactNode } from 'react';
 import treble from '@/assets/images/treble.png';
 import bass from '@/assets/images/bass.png';
 import Image from 'next/image';
+import Line from './line';
 
 type Props = {
   children: ReactNode;
   clef: 'bass' | 'treble';
 };
-
-const Line = chakra('div', {
-  base: {
-    '&:after': {
-      content: '""',
-      display: 'block',
-      height: '1px',
-      backgroundColor: '#000'
-    },
-    paddingY: '5px',
-    width: '100%',
-    '&:hover': {
-      backgroundColor: '#eee'
-    }
-  }
-});
 
 const Space = chakra('div', {
   base: {
@@ -68,13 +53,13 @@ export function Row({ children, clef }: Props) {
         <Space />
         <Line />
         <Space />
-        <Line variant="phantom" />
+        <Line floating />
         <Space />
-        <Line variant="phantom" />
+        <Line floating />
         <Space />
-        <Line variant="phantom" />
+        <Line floating />
         <Space />
-        <Line variant="phantom" />
+        <Line floating />
         <Space />
       </VStack>
     </VStack>
