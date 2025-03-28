@@ -11,6 +11,16 @@ type Props = {
   clef: 'bass' | 'treble';
 };
 
+const ClefContainer = chakra('div', {
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '80px',
+    height: '120px'
+  }
+});
+
 const Space = chakra('div', {
   base: {
     height: '11px',
@@ -33,11 +43,20 @@ const symbols = {
 
 export function Row({ children, clef }: Props) {
   return (
-    <VStack data-component="Row" alignItems="stretch" marginBottom={60}>
-      <Box position="absolute">
+    <VStack data-component="Row" alignItems="stretch" marginBottom={60} position="relative">
+      <ClefContainer>
         <Image src={symbols[clef]} alt="" width={40} height={40} />
-      </Box>
-      <HStack width="100%" flex={1} alignItems="stretch">
+      </ClefContainer>
+      <HStack
+        flex={1}
+        alignItems="stretch"
+        bgColor="rgba(255,0,0,0.5)"
+        height="120px"
+        left="80px"
+        right={0}
+        top={-2}
+        position="absolute"
+      >
         {children}
       </HStack>
       <VStack width="100%" gap={0}>
