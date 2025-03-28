@@ -15,7 +15,7 @@ const ClefContainer = chakra('div', {
   base: {
     display: 'flex',
     alignItems: 'center',
-    position: 'absolute',
+
     width: '80px',
     height: '120px'
   }
@@ -43,23 +43,14 @@ const symbols = {
 
 export function Row({ children, clef }: Props) {
   return (
-    <VStack data-component="Row" alignItems="stretch" marginBottom={60} position="relative">
+    <HStack data-component="Row" alignItems="stretch" marginBottom={60} position="relative">
       <ClefContainer>
         <Image src={symbols[clef]} alt="" width={40} height={40} />
       </ClefContainer>
-      <HStack
-        flex={1}
-        alignItems="stretch"
-        bgColor="rgba(255,0,0,0.5)"
-        height="120px"
-        left="80px"
-        right={0}
-        top={-2}
-        position="absolute"
-      >
+      <HStack flex={1} alignItems="stretch" bgColor="rgba(255,0,0,0.5)" position="relative">
         {children}
       </HStack>
-      <VStack width="100%" gap={0}>
+      <VStack width="100%" gap={0} position="absolute">
         <Line />
         <Space />
         <Line />
@@ -81,7 +72,7 @@ export function Row({ children, clef }: Props) {
         <Line floating />
         <Space />
       </VStack>
-    </VStack>
+    </HStack>
   );
 }
 

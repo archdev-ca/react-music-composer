@@ -22,7 +22,7 @@ const assets = {
 };
 
 const INCREMENT = 11;
-const BASE_POS = 88;
+const BASE_POS = 80;
 
 const NOTE_POSITION_OFFSET = {
   a0: '',
