@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import type { Note as NoteData, NoteDuration } from '../../types';
 import Note from './note';
 
@@ -10,7 +11,7 @@ type Props = {
 
 function Beat({ isRest, span, notes, duration }: Props) {
   return (
-    <div>
+    <Box sx={{ position: 'absolute', backgroundColor: 'rgba(255,0,0,.15)' }}>
       {notes?.length &&
         notes.map((note, i) => (
           <Note
@@ -21,7 +22,7 @@ function Beat({ isRest, span, notes, duration }: Props) {
             accidental={note.accidental}
           />
         ))}
-    </div>
+    </Box>
   );
 }
 

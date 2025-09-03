@@ -23,12 +23,22 @@ const NoteAccidental: Record<number, string> = {
   1: '#'
 };
 
-function Note({ noteKey, duration, accidental }: Props) {
+const style = {
+  bottom: 0
+};
+
+function Note({ noteKey, duration, accidental, octave }: Props) {
   return (
     <>
-      <Box component="img" sx={{ height: '15px' }} src={NoteAssets[duration]} alt="" />
+      <Box
+        component="img"
+        sx={{ height: '11px', position: 'absolute', ...style }}
+        src={NoteAssets[duration]}
+        alt=""
+      />
       <span>
         {noteKey}
+        {octave}
         {NoteAccidental[accidental]}
       </span>
     </>
