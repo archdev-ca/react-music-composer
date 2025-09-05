@@ -8,8 +8,7 @@ type Props = {
 };
 
 const Space = styled(Box)(() => ({
-  height: '11px',
-  backgroundColor: 'rgba(0,0, 255, .1)'
+  height: '11px'
 }));
 const Line = styled(Box)(() => ({
   height: '11px',
@@ -36,16 +35,22 @@ function Bar({ clef, beats }: Props) {
         borderLeft: '1px solid #000'
       }}
     >
-      {beats?.length &&
-        beats.map((beat, i) => (
-          <Beat
-            duration={beat.duration}
-            key={i}
-            isRest={beat.rest}
-            notes={beat.notes}
-            span={beat.span}
-          />
-        ))}
+      <Stack
+        className="stack-container"
+        direction="row"
+        sx={{ position: 'absolute', width: '100%', height: '100%' }}
+      >
+        {beats?.length &&
+          beats.map((beat, i) => (
+            <Beat
+              duration={beat.duration}
+              key={i}
+              isRest={beat.rest}
+              notes={beat.notes}
+              span={beat.span}
+            />
+          ))}
+      </Stack>
       <Line />
       <Space />
       <Line />

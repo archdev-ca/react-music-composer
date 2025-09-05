@@ -74,8 +74,8 @@ export interface Measure {
   index: number;
   timeSignature: { num: number; den: number };
   staves: {
-    treble: { clef: 'treble'; bars: [Bar] }; // one bar per staff per measure
-    bass: { clef: 'bass'; bars: [Bar] };
+    treble: { clef: 'treble'; bars: Bar[] }; // one bar per staff per measure
+    bass: { clef: 'bass'; bars: Bar[] };
   };
 }
 
@@ -84,3 +84,84 @@ export interface Score {
   measures: Measure[];
   systems: { index: number; measureIds: string[] }[];
 }
+export type OscType = OscillatorType;
+
+export interface PartialSpec {
+  /** Harmonic index: 1=fundamental, 2=2nd partial, 3=3rd… */
+  n: number;
+  type: OscType;
+  /** Relative amp (0..1). Overall loudness still scaled by velocity & masterGain */
+  amp: number;
+  /** Seconds (approx) for this partial’s tail — higher partials decay faster */
+  decay: number;
+  /** Random detune range (+/- cents) applied per start to reduce “organ” purity */
+  detuneCentsSpread?: number;
+  /** Extra start offset in seconds, to stagger partial onsets slightly */
+  phaseStagger?: number;
+}
+
+export interface EnvelopeSpec {
+  /** Fast attack for hammer strike (s) */
+  attack: number;
+  /** Drop to this % of peak after attack (0..1) */
+  decayDrop: number;
+  /** Time to reach decayDrop after attack (s) */
+  decayTime: number;
+  /** Long tail end time (total) from start (s) */
+  tail: number;
+}
+
+export interface FiltersSpec {
+  /** Gentle LPF to tame highs */
+  lpfHz?: number; // e.g., 9000
+  /** Optional high-shelf dip after the initial brightness */
+  highShelfHz?: number; // e.g., 6000
+  highShelfGain?: number; // e.g., -2.5 dB
+}
+
+export interface HammerSpec {
+  enable: boolean;
+  /** Band-pass center for hammer “thock” */
+  bandHz: number; // e.g., 2500
+  q: number; // e.g., 2.0
+  gain: number; // 0..1
+  dur: number; // ~0.02–0.05 s
+}
+
+export interface HarmonicNotePreset {
+  name: string;
+  fundHz: number;
+  /** Tiny inharmonicity stretch: freq = fund * n * (1 + B * n^2) */
+  inharmonicityB?: number; // e.g., 0.0003
+  partials: PartialSpec[];
+  envelope: EnvelopeSpec;
+  filters?: FiltersSpec;
+  hammer?: HammerSpec;
+  /** Overall preset loudness scaler (0..1) */
+  masterGain?: number;
+}
+
+/** Playback options you can vary per call */
+export interface PlayOptions {
+  when?: number; // seconds from now
+  velocity?: number; // 0..1
+  duration?: number; // hard ceiling for note length (s). Defaults to preset tail.
+}
+
+/** Handle you can stop early if needed */
+export interface PlayHandle {
+  stop(): void;
+}
+
+export type PlaybackEvent = {
+  measureId: string;
+  staff: Clef;
+  barIndex: number;
+  beatIndex: number;
+  startTick: number;
+  endTick: number;
+  startTimeSec: number;
+  endTimeSec: number;
+  duration: 1 | 2 | 4 | 8 | 16;
+  notes: Note[];
+};

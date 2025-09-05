@@ -11,7 +11,14 @@ type Props = {
 
 function Beat({ isRest, span, notes, duration }: Props) {
   return (
-    <Box sx={{ position: 'absolute', backgroundColor: 'rgba(255,0,0,.15)' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        width: `${(1 / duration) * 100}%`,
+        top: 0,
+        bottom: 0
+      }}
+    >
       {notes?.length &&
         notes.map((note, i) => (
           <Note
